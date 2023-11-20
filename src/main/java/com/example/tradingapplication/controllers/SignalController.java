@@ -27,7 +27,7 @@ public class SignalController {
         } catch (ClassNotFoundException e) {
             algoClass.cancelTrades();
             algoClass.doAlgo();
-            return new ResponseEntity<String>("Cannot Find Signal number executed default behaviour ", HttpStatus.OK);
+            return new ResponseEntity<String>("Cannot Find Signal number "+SignalNo+ " executed default behaviour", HttpStatus.OK);
         }
         signalClass.getMethod("execute").invoke(signalClass.newInstance());
         algoClass.doAlgo();
