@@ -24,11 +24,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 class SignalControllerTest {
+
     @Autowired
     private SignalController signalController;
+
     @Autowired
     private MockMvc mockMvc;
-
 
 
     @Test
