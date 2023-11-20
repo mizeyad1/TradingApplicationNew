@@ -1,5 +1,8 @@
 package com.example.tradingapplication;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Algo {
 
         public void doAlgo() {

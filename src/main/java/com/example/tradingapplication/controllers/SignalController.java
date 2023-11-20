@@ -2,6 +2,7 @@ package com.example.tradingapplication.controllers;
 
 
 import com.example.tradingapplication.Algo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,15 +13,15 @@ import java.lang.reflect.InvocationTargetException;
 
 @RestController
 public class SignalController {
-
-
+    @Autowired
+    private Algo algoClass;
+    Class<?> signalClass;
     @GetMapping("/signal/{signalNo}")
     public ResponseEntity<String> executeSignal(@PathVariable ("signalNo") String SignalNo) throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
-        Algo algoClass = new Algo();
+
         String pathName = "com.example.tradingapplication.models";
         String signalName = "Signal"+SignalNo;
-
-        Class<?> signalClass = null;
+        //Using Java Reflection to Get Class and call the execute method
         try {
             signalClass = Class.forName(pathName+"."+signalName);
         } catch (ClassNotFoundException e) {
