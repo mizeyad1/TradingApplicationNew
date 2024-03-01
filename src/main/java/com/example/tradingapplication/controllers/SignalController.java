@@ -27,7 +27,7 @@ public class SignalController {
     }
     public ResponseEntity<String> signalClass (String SignalNo)
     {
-        //Using Java Reflection to Get Class and call the execute method
+        //Using Java Reflection to Get Class and call the execute metho
         String pathName = "com.example.tradingapplication.models";
         String signalName = "Signal"+SignalNo;
         try {
