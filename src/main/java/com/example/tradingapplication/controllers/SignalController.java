@@ -17,22 +17,29 @@ public class SignalController {
     private Algo algoClass;
     Class<?> signalClass;
     @GetMapping("/signal/{signalNo}")
-    public ResponseEntity<String> executeSignal(@PathVariable ("signalNo") String SignalNo) throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+    public ResponseEntity<String> executeSignal(@PathVariable ("signalNo") Integer SignalNo) throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
 
+        //signalClass.getMethod("execute").invoke(signalClass.newInstance());
+        algoClass.doAlgo();
+        return new ResponseEntity<String>("Executed ", HttpStatus.OK);
+
+
+    }
+    public ResponseEntity<String> signalClass (String SignalNo)
+    {
+        //Using Java Reflection to Get Class and call the execute method
         String pathName = "com.example.tradingapplication.models";
         String signalName = "Signal"+SignalNo;
-        //Using Java Reflection to Get Class and call the execute method
         try {
-            signalClass = Class.forName(pathName+"."+signalName);
-        } catch (ClassNotFoundException e) {
+            signalClass = Class.forName(pathName + "." + signalName);
+        }
+        catch (ClassNotFoundException e) {
             algoClass.cancelTrades();
             algoClass.doAlgo();
             return new ResponseEntity<String>("Cannot Find Signal number "+SignalNo+ " executed default behaviour", HttpStatus.OK);
         }
-        signalClass.getMethod("execute").invoke(signalClass.newInstance());
-        algoClass.doAlgo();
-        return new ResponseEntity<String>("Executed "+signalName, HttpStatus.OK);
-
-
+        return null;
     }
+
+
 }
